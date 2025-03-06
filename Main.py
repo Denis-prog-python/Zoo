@@ -9,6 +9,15 @@ class Animal:
     def eat(self):
         print(f"{self.name} ест.")
 
+# Пример использования класса Animal
+class Dog(Animal):
+    def make_sound(self):
+        print(f"{self.name} лает!")
+
+class Cat(Animal):
+    def make_sound(self):
+        print(f"{self.name} Мяукает!")
+
 class Bird(Animal):
     def __init__(self, name, age, wingspan):
         super().__init__(name, age)
@@ -37,37 +46,32 @@ class Reptile(Animal):
         self.scale_type = scale_type  # Тип чешуи
 
     def make_sound(self):
-        print(f"{self.name} ревёт!")
+        print(f"{self.name} шипит!")
 
     def crawl(self):
         print(f"{self.name} ползёт.")
 
-# Пример использования класса Animal
-class Dog(Animal):
-    def make_sound(self):
-        print(f"{self.name} лает!")
+# Функция для демонстрации полиморфизма
+def animal_sound(animals):
+    for animal in animals:
+        animal.make_sound()
 
-class Cat(Animal):
-    def make_sound(self):
-        print(f"{self.name} Мяукает!")
-
+# Создаем объекты
 bird = Bird("Воробушек", 2, 0.1)
 mammal = Mammal("Лео", 5, "Рыжий")
 reptile = Reptile("Гена", 3, "Гладкий")
-
-# Создаем экземпляры классов
 dog = Dog("Шарик", 3)
 cat = Cat("Муся", 5)
 
-# Вызываем методы
-dog.make_sound()  # Шарик лает!
-cat.make_sound()  # Муся мяукает!
-bird.make_sound()  # Воробышек чирикает!
-bird.fly()         # Воробышек летает с размахом крыльев 0.1 метра.
-dog.eat()  # Шарик ест.
-cat.eat()  # Муся ест.
+# Создаем список животных
+animals = [bird, mammal, reptile, dog, cat]
 
-mammal.make_sound()  # Лео рыжий!
-mammal.run()         # Лео бежит.
-reptile.make_sound()  # Гена рычит!
-reptile.crawl()       # Гена ползет.
+# Вызываем функцию animal_sound
+animal_sound(animals)
+
+# Вызываем методы для каждого животного
+bird.fly()         # Воробушек летает с размахом крыльев 0.1 метра.
+mammal.run()       # Лео бежит.
+reptile.crawl()    # Гена ползёт.
+dog.eat()          # Шарик ест.
+cat.eat()          # Муся ест.
