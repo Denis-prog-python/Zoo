@@ -59,6 +59,24 @@ class Employee:
     def work(self):
         print(f"{self.name} ({self.position}) работает.")
 
+class ZooKeeper(Employee):
+    def __init__(self, name):
+        super().__init__(name, "Смотритель")
+
+    def feed_animal(self, animal):
+        """Кормит животное."""
+        print(f"{self.name} кормит {animal.name}.")
+        animal.eat()
+
+class Veterinarian(Employee):
+    def __init__(self, name):
+        super().__init__(name, "Ветеринар")
+
+    def heal_animal(self, animal):
+        """Лечит животное."""
+        print(f"{self.name} лечит {animal.name}.")
+        print(f"{animal.name} теперь чувствует себя лучше!")
+
 class Zoo:
     def __init__(self):
         self.animals = []  # Список животных в зоопарке
@@ -111,15 +129,15 @@ cat = Cat("Муся", 5)
 animals = [bird, mammal, reptile, dog, cat]
 
 # Создаем сотрудников
-employee1 = Employee("Иван", "Смотритель")
-employee2 = Employee("Мария", "Ветеринар")
+zookeeper = ZooKeeper("Иван")
+veterinarian = Veterinarian("Мария")
 
 # Добавляем животных и сотрудников в зоопарк
 zoo.add_animal(bird)
 zoo.add_animal(mammal)
 zoo.add_animal(reptile)
-zoo.add_employee(employee1)
-zoo.add_employee(employee2)
+zoo.add_employee(zookeeper)
+zoo.add_employee(veterinarian)
 
 # Вызываем функцию animal_sound
 animal_sound(animals)
@@ -136,3 +154,11 @@ for employee in zoo.employees:
 for animal in zoo.animals:
     animal.make_sound()
     animal.eat()
+
+# Смотритель кормит животных
+zookeeper.feed_animal(bird)
+zookeeper.feed_animal(mammal)
+
+# Ветеринар лечит животных
+veterinarian.heal_animal(reptile)
+veterinarian.heal_animal(mammal)
