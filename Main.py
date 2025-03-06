@@ -9,7 +9,7 @@ class Animal:
     def eat(self):
         print(f"{self.name} ест.")
 
-# Пример использования класса Animal
+# Примеры использования класса Animal
 class Dog(Animal):
     def make_sound(self):
         print(f"{self.name} лает!")
@@ -51,12 +51,56 @@ class Reptile(Animal):
     def crawl(self):
         print(f"{self.name} ползёт.")
 
+class Employee:
+    def __init__(self, name, position):
+        self.name = name
+        self.position = position
+
+    def work(self):
+        print(f"{self.name} ({self.position}) работает.")
+
+class Zoo:
+    def __init__(self):
+        self.animals = []  # Список животных в зоопарке
+        self.employees = []  # Список сотрудников в зоопарке
+
+    def add_animal(self, animal):
+        """Добавляет животное в зоопарк."""
+        self.animals.append(animal)
+        print(f"{animal.name} добавлен(а) в зоопарк.")
+
+    def add_employee(self, employee):
+        """Добавляет сотрудника в зоопарк."""
+        self.employees.append(employee)
+        print(f"{employee.name} ({employee.position}) добавлен(а) в зоопарк.")
+
+    def show_animals(self):
+        """Выводит список всех животных в зоопарке."""
+        if not self.animals:
+            print("В зоопарке пока нет животных.")
+        else:
+            print("Животные в зоопарке:")
+            for animal in self.animals:
+                print(f"- {animal.name} ({animal.__class__.__name__})")
+
+    def show_employees(self):
+        """Выводит список всех сотрудников в зоопарке."""
+        if not self.employees:
+            print("В зоопарке пока нет сотрудников.")
+        else:
+            print("Сотрудники в зоопарке:")
+            for employee in self.employees:
+                print(f"- {employee.name} ({employee.position})")
+
+# Пример использования
+zoo = Zoo()
+
 # Функция для демонстрации полиморфизма
 def animal_sound(animals):
     for animal in animals:
         animal.make_sound()
 
-# Создаем объекты
+# Создаем животных
 bird = Bird("Воробушек", 2, 0.1)
 mammal = Mammal("Лео", 5, "Рыжий")
 reptile = Reptile("Гена", 3, "Гладкий")
@@ -66,12 +110,29 @@ cat = Cat("Муся", 5)
 # Создаем список животных
 animals = [bird, mammal, reptile, dog, cat]
 
+# Создаем сотрудников
+employee1 = Employee("Иван", "Смотритель")
+employee2 = Employee("Мария", "Ветеринар")
+
+# Добавляем животных и сотрудников в зоопарк
+zoo.add_animal(bird)
+zoo.add_animal(mammal)
+zoo.add_animal(reptile)
+zoo.add_employee(employee1)
+zoo.add_employee(employee2)
+
 # Вызываем функцию animal_sound
 animal_sound(animals)
 
-# Вызываем методы для каждого животного
-bird.fly()         # Воробушек летает с размахом крыльев 0.1 метра.
-mammal.run()       # Лео бежит.
-reptile.crawl()    # Гена ползёт.
-dog.eat()          # Шарик ест.
-cat.eat()          # Муся ест.
+# Выводим информацию о зоопарке
+zoo.show_animals()
+zoo.show_employees()
+
+# Демонстрация работы сотрудников
+for employee in zoo.employees:
+    employee.work()
+
+# Демонстрация поведения животных
+for animal in zoo.animals:
+    animal.make_sound()
+    animal.eat()
